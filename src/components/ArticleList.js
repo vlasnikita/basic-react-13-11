@@ -5,11 +5,12 @@ import Accordion from './common/Accordion'
 import Loader from './common/Loader'
 import {connect} from 'react-redux'
 import {filtratedArticlesSelector, articlesLoadingSelector} from '../selectors'
-import {loadAllArticles} from '../AC'
+import {loadAllArticles, loadAllComments} from '../AC'
 
 class ArticleList extends Accordion {
     componentDidMount() {
         this.props.loadAllArticles()
+        this.props.loadAllComments()
     }
 
     render() {
@@ -44,4 +45,4 @@ export default connect(state => {
         articles: filtratedArticlesSelector(state),
         loading: articlesLoadingSelector(state)
     }
-}, { loadAllArticles })(ArticleList)
+}, { loadAllArticles, loadAllComments })(ArticleList)
