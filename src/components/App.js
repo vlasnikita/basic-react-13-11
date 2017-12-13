@@ -4,6 +4,7 @@ import ArticlesPage from './routes/ArticlesPage'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
+import CommentsPage from './routes/CommentsPage'
 
 class App extends Component {
     render() {
@@ -15,11 +16,13 @@ class App extends Component {
                     <div><NavLink to="/counter" activeStyle={{color: 'red'}}>counter</NavLink></div>
                     <div><NavLink to="/articles" activeStyle={{color: 'red'}}>articles</NavLink></div>
                     <div><NavLink to="/filters" activeStyle={{color: 'red'}}>filters</NavLink></div>
+                    <div><NavLink to="/comments" activeStyle={{color: 'red'}}>comments</NavLink></div>
                 </div>
                 <Switch>
                     <Route path="/counter" component={Counter} strict exact/>
                     <Route path="/filters" component={Filters}/>
                     <Route path="/articles" component={ArticlesPage}/>
+                    <Route path="/comments" component={CommentsPage}/>
                 </Switch>
             </div>
         )
