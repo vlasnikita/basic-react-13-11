@@ -6,12 +6,14 @@ import CommentForm from './CommentForm'
 import Loader from './common/Loader'
 import {connect} from 'react-redux'
 import {loadArticleComments} from '../AC'
+import { DICTIONARY } from "../constants/"
 
 class CommentList extends Component {
     static contextTypes = {
         store: PropTypes.object,
         router: PropTypes.object,
-        username: PropTypes.string
+        username: PropTypes.string,
+        lang: PropTypes.string
     }
 
     componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
@@ -22,7 +24,9 @@ class CommentList extends Component {
 
     render() {
         const {isOpen, toggleOpen} = this.props
-        const text = isOpen ? 'hide comments' : 'show comments'
+        const { showComments, hideComments } = DICTIONARY[this.context.lang]
+
+        const text = isOpen ? hideComments : showComments
         return (
             <div>
                 <button onClick={toggleOpen}>{text}</button>

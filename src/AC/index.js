@@ -80,7 +80,7 @@ export function loadArticleById(id) {
 
                     dispatch(replace('/error'))
                 })
-        }, 950)
+        }, 1000)
     }
 }
 

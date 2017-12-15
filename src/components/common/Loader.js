@@ -1,12 +1,19 @@
-import React from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import { DICTIONARY } from "../../constants/"
 
-function Loader(props) {
-    return (
-        <h2>Loading...</h2>
-    )
+class Loader extends Component {
+    static contextTypes = {
+        lang: PropTypes.string
+    }
+    render() {
+        return (
+            <h2>{DICTIONARY[this.context.lang].loading}</h2>
+        )
+    }
 }
 
-Loader.propTypes = {
-}
+Loader.propTypes = {};
+Loader.defaultProps = {};
 
-export default Loader
+export default Loader;

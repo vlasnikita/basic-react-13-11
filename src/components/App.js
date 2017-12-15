@@ -7,35 +7,44 @@ import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
 import Menu, {MenuItem} from './Menu'
+import LanguageToggler from './LanguageToggler'
+import { DICTIONARY } from "../constants/"
 
 class App extends Component {
     static childContextTypes = {
-        username: PropTypes.string
+        username: PropTypes.string,
+        lang: PropTypes.string
     }
 
     getChildContext() {
         return {
-            username: this.state.user
+            username: this.state.user,
+            lang: this.state.lang
         }
     }
 
     state = {
-        user: ''
+        user: '',
+        lang: 'EN'
     }
 
     handleUserChange = user => this.setState({ user })
+    handleLangClick = () => {
+        this.setState({ lang: this.state.lang === 'EN' ? 'RU' : 'EN' })
+    }
 
     render() {
-        console.log('---', 1)
+        const { lang } = this.state
         return (
             <div>
-                <h1>App name</h1>
+                <h1>{DICTIONARY[lang].appName}</h1>
+                <LanguageToggler onClick={this.handleLangClick}/>
                 <UserForm value = {this.state.user} onChange = {this.handleUserChange}/>
                 <Menu>
-                    <MenuItem url="/counter">Counter</MenuItem>
-                    <MenuItem url="/articles">Articles</MenuItem>
-                    <MenuItem url="/filters">Filters</MenuItem>
-                    <MenuItem url="/comments/1">Comments</MenuItem>
+                    <MenuItem url="/counter">{DICTIONARY[lang].counter}</MenuItem>
+                    <MenuItem url="/articles">{DICTIONARY[lang].articles}</MenuItem>
+                    <MenuItem url="/filters">{DICTIONARY[lang].filters}</MenuItem>
+                    <MenuItem url="/comments/1">{DICTIONARY[lang].comments}</MenuItem>
                 </Menu>
                 <Switch>
                     <Redirect from="/" exact to="/articles"/>

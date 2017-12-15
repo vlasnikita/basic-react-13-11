@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {increment} from '../AC'
+import { DICTIONARY } from "../constants/"
 
 class Counter extends Component {
-    static propTypes = {
-
-    };
+    static contextTypes = {
+        lang: PropTypes.string
+    }
 
     render() {
         return (
             <div>
                 <h1>{this.props.count}</h1>
-                <button onClick = {this.onClick}>Increment me</button>
+                <button onClick = {this.onClick}>{DICTIONARY[this.context.lang].incrementBtn}</button>
             </div>
         )
     }

@@ -57,7 +57,7 @@ class Article extends Component {
         console.log('---', 4)
         if (this.state.error) return <h1>{this.state.error}</h1>
 
-        const {article, isOpen, toggleOpen} = this.props
+        const {article, isOpen, toggleOpen, deleteText, creationDate, open, close } = this.props
         if (!article) return null
 
         return (
@@ -65,9 +65,9 @@ class Article extends Component {
                 <h2>
                     {article.title}
                     <button onClick={toggleOpen}>
-                        {isOpen ? 'close' : 'open'}
+                        {isOpen ? close : open}
                     </button>
-                    <button onClick = {this.handleDelete}>delete me</button>
+                    <button onClick = {this.handleDelete}>{deleteText}</button>
                 </h2>
                 <CSSTransition
                     transitionName = 'article'
@@ -79,18 +79,18 @@ class Article extends Component {
                 >
                     {this.getBody()}
                 </CSSTransition>
-                <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                <h3>{creationDate}: {(new Date(article.date)).toDateString()}</h3>
             </div>
         )
     }
 
     getBody() {
-        const {article, isOpen} = this.props
+        const {article, isOpen, increment} = this.props
         if (!isOpen) return null
         if (article.loading) return <Loader />
         return (
             <div>
-                <button onClick = {this.increment}>increment</button>
+                <button onClick = {this.increment}>{increment}</button>
                 <section>{article.text}</section>
                 <CommentList article = {article}
                              key = {this.state.counter}/>

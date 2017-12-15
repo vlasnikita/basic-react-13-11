@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { DICTIONARY } from "../constants/"
 
 class UserForm extends Component {
-    static propTypes = {
-
-    };
+    static contextTypes = {
+        lang: PropTypes.string
+    }
 
     handleChange = ev => {
         const {value} = ev.target
@@ -14,7 +15,7 @@ class UserForm extends Component {
     render() {
         return (
             <div>
-                Username: <input value = {this.props.value} onChange = {this.handleChange} />
+                {DICTIONARY[this.context.lang].usernameLabel}: <input value = {this.props.value} onChange = {this.handleChange} />
             </div>
         )
     }
